@@ -158,10 +158,18 @@ function payNow(){
   })
   .then(res => res.json())
   .then(data => {
+
+    console.log("Stripe response:", data);  // ✅ ADD THIS LINE
+
+    if(!data.url){
+      alert("Error: " + JSON.stringify(data)); // ✅ SHOW REAL ERROR
+      return;
+    }
+
     window.location.href = data.url;
   })
   .catch(err => {
-    alert("Payment error. Please try again.");
+    alert("Payment error: " + err);
   });
 }
 </script>
