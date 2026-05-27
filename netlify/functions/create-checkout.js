@@ -3,7 +3,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 exports.handler = async (event) => {
   const { amount, firstName, lastName, email, phone, adultShirts, kidsShirts, dues } = JSON.parse(event.body);
   
-  / ✅ ADD THIS BLOCK RIGHT HERE
+  // ✅ ADD THIS BLOCK RIGHT HERE
     if (isNaN(amount) || amount <= 0) {
       return {
         statusCode: 400,
