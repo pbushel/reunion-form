@@ -11,9 +11,15 @@ exports.handler = async (event) => {
       lastName,
       email,
       phone,
+    
+      adultShirts: "",   // ✅ placeholder
+      kidsShirts: "",    // ✅ placeholder
+      dues: "",          // ✅ placeholder
+    
       total: amount,
       status: "Paid"
     })
+
   });
 
   try {
