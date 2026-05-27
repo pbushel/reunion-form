@@ -154,7 +154,14 @@ function payNow(){
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ amount: total })
+    
+    body: JSON.stringify({
+      amount: total,
+      name: document.querySelector("input[type=text]").value,
+      email: document.querySelector("input[type=email]").value,
+      phone: document.querySelector("input[type=text]").value
+    })
+
   })
   .then(res => res.json())
   .then(data => {
