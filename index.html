@@ -142,66 +142,47 @@ button:hover {background:#17847f}
 </div>
 
 <script>
+
+// ✅ SINGLE calculateTotal FUNCTION (keep only this one)
 function calculateTotal(){
-let nums=document.querySelectorAll("input[type=number]");
-let prices=[20,20,20,22,25,27,30,12,12,12,12,5];
-let total=0;
-nums.forEach((n,i)=>total+=n.value*prices[i]);
-document.getElementById('total').innerText=total;
+  let nums = document.querySelectorAll("input[type=number]");
+  let prices = [20,20,20,22,25,27,30,12,12,12,12,5];
+  let total = 0;
+
+  nums.forEach((n,i) => total += Number(n.value) * prices[i]);
+
+  document.getElementById('total').innerText = total;
 }
 
-// Auto update total on change
-document.querySelectorAll("input[type=number]").forEach(el=>{
-el.addEventListener("input", calculateTotal);
+// ✅ Auto update total when user types
+document.querySelectorAll("input[type=number]").forEach(el => {
+  el.addEventListener("input", calculateTotal);
 });
-  <h2>Total Amount</h2>
-  <div class="row">
-    <label>Total:</label>
-    <span id="total">0</span>
-  </div>
-<div class="buttons"
-  <button onclick="calculateTotal()">Calculate Total</button>
-   <br><br> 
-  <button onclick="payNow()">Pay Now</button>
-</div>
+
+
+// ✅ FIXED payNow FUNCTION
 function payNow(){
 
   let total = Number(document.getElementById("total").innerText);
-  
+
   console.log("Total:", total);
+
   if (isNaN(total) || total <= 0) {
-    alert("Total is invalid. Please calculate total first.");
+    alert("Please calculate total first.");
     return;
   }
 
-  if(total <= 0){
-    alert("Please add items before paying.");
-    return;
-  }
-  function calculateTotal() {
+  // ✅ DEFINE THESE (they were missing before = big bug)
+  let adultShirts =
+    "S:" + document.getElementById("adultS").value +
+    ", M:" + document.getElementById("adultM").value +
+    ", L:" + document.getElementById("adultL").value;
 
-    let total = 0;
-  
-    // Adult shirts
-    total += Number(document.getElementById("adultS").value) * 20;
-    total += Number(document.getElementById("adultM").value) * 20;
-    total += Number(document.getElementById("adultL").value) * 20;
-    total += Number(document.getElementById("adultXL").value) * 22;
-    total += Number(document.getElementById("adultXXL").value) * 25;
-    total += Number(document.getElementById("adultXXXL").value) * 27;
-    total += Number(document.getElementById("adultXXXXL").value) * 30;
-  
-    // Kids shirts
-    total += Number(document.getElementById("kidsXS").value) * 12;
-    total += Number(document.getElementById("kidsS").value) * 12;
-    total += Number(document.getElementById("kidsM").value) * 12;
-    total += Number(document.getElementById("kidsL").value) * 12;
-  
-    document.getElementById("total").innerText = total;
-}
-
-
-  console.log("Total being sent:", total);
+  let kidsShirts =
+    "XS:" + document.getElementById("kidsXS").value +
+    ", S:" + document.getElementById("kidsS").value +
+    ", M:" + document.getElementById("kidsM").value +
+    ", L:" + document.getElementById("kidsL").value;
 
   fetch("/.netlify/functions/create-checkout", {
     method: "POST",
@@ -210,39 +191,42 @@ function payNow(){
     },
     
     body: JSON.stringify({
-      amount: total,   // ✅ ADD THIS (THIS FIXES YOUR ERROR)
-    
+      amount: total,
+
       firstName: document.getElementById("firstName").value,
       lastName: document.getElementById("lastName").value,
       email: document.getElementById("email").value,
       phone: document.getElementById("phone").value,
-    
+
       adultShirts: adultShirts,
       kidsShirts: kidsShirts,
       dues: 0,
-    
-      total: total,     // ✅ KEEP THIS (for Google Sheets)
-      status: "Paid"    // ✅ KEEP THIS
+
+      total: total,
+      status: "Paid"
     })
 
   })
   .then(res => res.json())
   .then(data => {
 
-    console.log("Stripe response:", data);  // ✅ ADD THIS LINE
+    console.log("Stripe response:", data);
 
-    if(!data.url){
-      alert("Error: " + JSON.stringify(data)); // ✅ SHOW REAL ERROR
+    if (!data.url) {
+      alert("Error: " + JSON.stringify(data));
       return;
     }
 
     window.location.href = data.url;
   })
   .catch(err => {
-    alert("Payment error: " + err);
+    console.error(err);
+    alert("Payment error");
   });
 }
+
 </script>
+
 
 
 </body>
