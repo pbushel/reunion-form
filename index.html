@@ -160,6 +160,9 @@ el.addEventListener("input", calculateTotal);
     <label>Total:</label>
     <span id="total">0</span>
   </div>
+
+  <button onclick="calculateTotal()">Calculate Total</button>
+
 function payNow(){
 
   let total = Number(document.getElementById("total").innerText);
