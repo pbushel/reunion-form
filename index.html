@@ -126,7 +126,7 @@ button:hover {background:#17847f}
 <h2>Dues</h2>
 <div class='row'><label>People age 13+ ($5)</label><input id='dues' type='number' value='0'></div>
 
-<div class='total'>Total: $<span id='total'>0</span></div>
+<div class='total'>Total: <span id='total'>0</span></div>
 
 <div class='buttons'>
 
@@ -156,15 +156,16 @@ document.getElementById('total').innerText=total;
 document.querySelectorAll("input[type=number]").forEach(el=>{
 el.addEventListener("input", calculateTotal);
 });
+  <h2>Total Amount</h2
   <div class="row">
     <label>Total:</label>
     <span id="total">0</span>
   </div>
-
+<div class="buttons"
   <button onclick="calculateTotal()">Calculate Total</button>
    <br><br> 
   <button onclick="payNow()">Pay Now</button>
-
+</div>
 function payNow(){
 
   let total = Number(document.getElementById("total").innerText);
