@@ -2,6 +2,19 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
   const { amount, name, email, phone } = JSON.parse(event.body);
+  // ✅ SEND DATA TO GOOGLE SHEETS
+  await fetch("YOUR_GOOGLE_SCRIPT_URL", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      firstName,
+      lastName,
+      email,
+      phone,
+      total: amount,
+      status: "Paid"
+    })
+  });
 
   try {
     const session = await stripe.checkout.sessions.create({
