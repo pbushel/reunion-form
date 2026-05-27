@@ -184,7 +184,8 @@ function payNow(){
     ", M:" + document.getElementById("kidsM").value +
     ", L:" + document.getElementById("kidsL").value;
 
-  fetch("/.netlify/functions/create-checkout", {
+  // fetch("/.netlify/functions/create-checkout", {
+  fetch("https://gorgeous-crepe-f1522b.netlify.app/.netlify/functions/create-checkout", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
