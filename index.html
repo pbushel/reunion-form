@@ -159,7 +159,12 @@ el.addEventListener("input", calculateTotal);
 
 function payNow(){
 
-  let total = parseInt(document.getElementById("total").innerText);
+  let total = Number(document.getElementById("total").innerText);
+
+  if (isNaN(total) || total <= 0) {
+    alert("Total is invalid. Please calculate total first.");
+    return;
+  }
 
   if(total <= 0){
     alert("Please add items before paying.");
