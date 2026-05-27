@@ -174,9 +174,19 @@ function payNow(){
     
     body: JSON.stringify({
       amount: total,
-      name: document.querySelector("input[type=text]").value,
-      email: document.querySelector("input[type=email]").value,
-      phone: document.querySelector("input[type=text]").value
+    
+      firstName: document.getElementById("firstName").value,
+      lastName: document.getElementById("lastName").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+    
+      // 🔹 For now use simple placeholders (we’ll improve later)
+      adultShirts: "manual",  
+      kidsShirts: "manual",
+      dues: 0,
+    
+      total: total,
+      status: "Paid"
     })
 
   })
