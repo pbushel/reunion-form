@@ -174,20 +174,28 @@ function payNow(){
     alert("Please add items before paying.");
     return;
   }
-  let adultShirts =
-    "S:" + document.getElementById("adultS").value + ", " +
-    "M:" + document.getElementById("adultM").value + ", " +
-    "L:" + document.getElementById("adultL").value + ", " +
-    "XL:" + document.getElementById("adultXL").value + ", " +
-    "XXL:" + document.getElementById("adultXXL").value + ", " +
-    "XXXL:" + document.getElementById("adultXXXL").value + ", " +
-    "XXXXL:" + document.getElementById("adultXXXXL").value;
+  function calculateTotal() {
+
+    let total = 0;
   
-  let kidsShirts =
-    "XS:" + document.getElementById("kidsXS").value + ", " +
-    "S:" + document.getElementById("kidsS").value + ", " +
-    "M:" + document.getElementById("kidsM").value + ", " +
-    "L:" + document.getElementById("kidsL").value;
+    // Adult shirts
+    total += Number(document.getElementById("adultS").value) * 20;
+    total += Number(document.getElementById("adultM").value) * 20;
+    total += Number(document.getElementById("adultL").value) * 20;
+    total += Number(document.getElementById("adultXL").value) * 22;
+    total += Number(document.getElementById("adultXXL").value) * 25;
+    total += Number(document.getElementById("adultXXXL").value) * 27;
+    total += Number(document.getElementById("adultXXXXL").value) * 30;
+  
+    // Kids shirts
+    total += Number(document.getElementById("kidsXS").value) * 12;
+    total += Number(document.getElementById("kidsS").value) * 12;
+    total += Number(document.getElementById("kidsM").value) * 12;
+    total += Number(document.getElementById("kidsL").value) * 12;
+  
+    document.getElementById("total").innerText = total;
+}
+
 
   console.log("Total being sent:", total);
 
