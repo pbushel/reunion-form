@@ -198,6 +198,8 @@ function payNow(){
     },
     
     body: JSON.stringify({
+      amount: total,   // ✅ ADD THIS (THIS FIXES YOUR ERROR)
+    
       firstName: document.getElementById("firstName").value,
       lastName: document.getElementById("lastName").value,
       email: document.getElementById("email").value,
@@ -207,8 +209,8 @@ function payNow(){
       kidsShirts: kidsShirts,
       dues: 0,
     
-      total: total,
-      status: "Paid"
+      total: total,     // ✅ KEEP THIS (for Google Sheets)
+      status: "Paid"    // ✅ KEEP THIS
     })
 
   })
