@@ -156,7 +156,10 @@ document.getElementById('total').innerText=total;
 document.querySelectorAll("input[type=number]").forEach(el=>{
 el.addEventListener("input", calculateTotal);
 });
-
+  <div class="row">
+    <label>Total:</label>
+    <span id="total">0</span>
+  </div>
 function payNow(){
 
   let total = Number(document.getElementById("total").innerText);
