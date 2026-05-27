@@ -3,7 +3,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 exports.handler = async (event) => {
   const { amount, name, email, phone } = JSON.parse(event.body);
   // ✅ SEND DATA TO GOOGLE SHEETS
-  await fetch("YOUR_GOOGLE_SCRIPT_URL", {
+  await fetch("https://script.google.com/macros/s/AKfycbxzocf7EBTK8mIdA8nA8UprPCJurGgw_C-filj4cvSqhVyziKrYQvJzgf5U5Ef85uAO1w/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
