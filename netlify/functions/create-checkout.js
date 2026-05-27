@@ -6,6 +6,14 @@ exports.handler = async (event) => {
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
+      customer_email: email,
+      
+      metadata: {               
+          name: name,
+          phone: phone,
+          total: amount
+      },
+
       line_items: [
         {
           price_data: {
