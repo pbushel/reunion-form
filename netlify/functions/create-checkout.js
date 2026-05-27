@@ -1,7 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
-  const { amount, firstName, lastName, email, phone } = JSON.parse(event.body);
+  const { amount, firstName, lastName, email, phone, adultShirts, kidsShirts, dues } = JSON.parse(event.body);
   // ✅ SEND DATA TO GOOGLE SHEETS
   await fetch("https://script.google.com/macros/s/AKfycbxzocf7EBTK8mIdA8nA8UprPCJurGgw_C-filj4cvSqhVyziKrYQvJzgf5U5Ef85uAO1w/exec", {
     method: "POST",
@@ -12,13 +12,14 @@ exports.handler = async (event) => {
       email,
       phone,
     
-      adultShirts: "",   // ✅ placeholder
-      kidsShirts: "",    // ✅ placeholder
-      dues: "",          // ✅ placeholder
+      adultShirts,   // ✅ USE REAL VALUE
+      kidsShirts,    // ✅ USE REAL VALUE
+      dues,          // ✅ USE REAL VALUE
     
       total: amount,
       status: "Paid"
     })
+
 
   });
 
