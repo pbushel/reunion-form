@@ -185,6 +185,8 @@ function payNow(){
     "M:" + document.getElementById("kidsM").value + ", " +
     "L:" + document.getElementById("kidsL").value;
 
+  console.log("Total being sent:", total);
+
   fetch("/.netlify/functions/create-checkout", {
     method: "POST",
     headers: {
