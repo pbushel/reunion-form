@@ -22,7 +22,7 @@ exports.handler = async (event) => {
       customer_email: email,
       
       metadata: {               
-          name: name,
+          name: firstName + " " + lastName,
           phone: phone,
           total: amount
       },
