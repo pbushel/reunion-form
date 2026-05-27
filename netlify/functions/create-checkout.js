@@ -19,8 +19,9 @@ exports.handler = async (event) => {
         }
       ],
       mode: "payment",
-      success_url: "/success.html",
-      cancel_url: "/"
+    success_url: "https://gorgeous-crepe-f1522b.netlify.app/success.html",
+    cancel_url: "https://gorgeous-crepe-f1522b.netlify.app",
+
     });
 
     return {
