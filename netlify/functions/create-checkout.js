@@ -2,6 +2,15 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
   const { amount, firstName, lastName, email, phone, adultShirts, kidsShirts, dues } = JSON.parse(event.body);
+  
+  / ✅ ADD THIS BLOCK RIGHT HERE
+    if (isNaN(amount) || amount <= 0) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Invalid amount received" })
+      };
+    }
+
   // ✅ SEND DATA TO GOOGLE SHEETS
   await fetch("https://script.google.com/macros/s/AKfycbxzocf7EBTK8mIdA8nA8UprPCJurGgw_C-filj4cvSqhVyziKrYQvJzgf5U5Ef85uAO1w/exec", {
     method: "POST",
