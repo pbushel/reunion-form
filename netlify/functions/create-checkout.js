@@ -1,4 +1,18 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+exports.handler = async (event) => {
+
+  // ✅ HANDLE PREFLIGHT (THIS IS REQUIRED)
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "POST, OPTIONS"
+      },
+      body: ""
+    };
+  }
 
 exports.handler = async (event) => {
   const { amount, firstName, lastName, email, phone, adultShirts, kidsShirts, dues } = JSON.parse(event.body);
