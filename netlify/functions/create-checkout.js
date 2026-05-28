@@ -79,14 +79,14 @@ exports.handler = async (event) => {
       body: JSON.stringify({ url: session.url })
     };
 
-  } catch (error) {
-
-  console.error("STRIPE ERROR:", error);  // ✅ ADD THIS
-
-  return {
-    statusCode: 500,
-    headers,
-    body: JSON.stringify({ error: error.message })
-  };
-}
-
+    } catch (error) {
+  
+    console.error("STRIPE ERROR:", error);  // ✅ ADD THIS
+  
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: error.message })
+    };
+  }
+};  // ✅ THIS LINE WAS MISSING
