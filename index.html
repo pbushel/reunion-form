@@ -334,8 +334,10 @@ function resetForm() {
   document.getElementById("email").value = "";
   document.getElementById("phone").value = "";
 
-  // reset total
-  document.getElementById("total").innerText = 0;
+  // ✅ reset totals (all of them now)
+  document.getElementById("subtotal").innerText = "0.00";
+  document.getElementById("fee").innerText = "0.00";
+  document.getElementById("total").innerText = "0.00";
 }
 
 </script>
