@@ -86,13 +86,13 @@ exports.handler = async (event) => {
   console.error("STRIPE ERROR:", error);  // ✅ ADD THIS
 
   return {
-    statusCode: 500,                      // ✅ IMPORTANT (not 200)
-    headers: {
-      "Access-Control-Allow-Origin": "*"
-    },
-    body: JSON.stringify({
-      error: error.message               // ✅ RETURN REAL ERROR
-    })
-  };
+  statusCode: 500,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS"
+  },
+  body: JSON.stringify({ error: error.message })
+};
 }
 
