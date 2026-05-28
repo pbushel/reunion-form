@@ -59,7 +59,7 @@ exports.handler = async (event) => {
             product_data: {
               name: "Tucker‑Bushel(l) T‑Shirt Order"
             },
-            unit_amount: amount * 100
+            unit_amount: Math.round(amount * 100)
           },
           quantity: 1
         }
