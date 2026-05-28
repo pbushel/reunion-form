@@ -281,27 +281,31 @@ function payNow() {
       lastName: document.getElementById("lastName").value,
       email: document.getElementById("email").value,
       phone: document.getElementById("phone").value,
-  
       adultShirts: adultShirts,
       kidsShirts: kidsShirts,
       dues: dues,
-  
       total: total,
       status: "Paid"
     })
   })
-  .then(res => res.json())
+  .then(res => {
+    console.log("Response status:", res.status);  // ✅ DEBUG
+    return res.json();
+  })
   .then(data => {
+    console.log("Response data:", data);  // ✅ DEBUG
+  
     if (data.url) {
-      window.location.href = data.url;  // ✅ Redirect to Stripe
+      window.location.href = data.url;   // ✅ Stripe redirect
     } else {
-      alert("Error: Unable to start payment.");
+      alert("No payment URL returned.");
     }
   })
   .catch(err => {
     console.error("Payment error:", err);
-    alert("Payment failed. Please try again.");
+    alert("Payment failed — see console.");
   });
+
   .then(res => {
     if (!res.ok) {
       throw new Error("Network response was not ok");
