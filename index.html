@@ -186,45 +186,49 @@ function payNow(){
 
   // fetch("/.netlify/functions/create-checkout", {
   fetch("https://gorgeous-crepe-f1522b.netlify.app/.netlify/functions/create-checkout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    
-    body: JSON.stringify({
-      amount: total,
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
 
-      firstName: document.getElementById("firstName").value,
-      lastName: document.getElementById("lastName").value,
-      email: document.getElementById("email").value,
-      phone: document.getElementById("phone").value,
+  body: JSON.stringify({
+    amount: total,
 
-      adultShirts: adultShirts,
-      kidsShirts: kidsShirts,
-      dues: Number(document.getElementById("dues").value),
+    firstName: document.getElementById("firstName").value,
+    lastName: document.getElementById("lastName").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
 
-      total: total,
-      status: "Paid"
-    })
+    adultShirts: adultShirts,
+    kidsShirts: kidsShirts,
+    dues: Number(document.getElementById("dues").value),
 
+    total: total,
+    status: "Paid"
   })
-  .then(res => res.json())
-  .then(data => {
+})
+.then(res => {
+  if (!res.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return res.json();
+})
+.then(data => {
 
-    console.log("Stripe response:", data);
+  console.log("Stripe response:", data);
 
-    if (!data.url) {
-      alert("Error: " + JSON.stringify(data));
-      return;
-    }
+  if (!data.url) {
+    alert("Error: " + JSON.stringify(data));
+    return;
+  }
 
-    window.location.href = data.url;
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Payment error");
-  });
-}
+  // ✅ Redirect to Stripe Checkout
+  window.location.href = data.url;
+})
+.catch(err => {
+  console.error("FULL ERROR:", err);
+  alert("Payment error");
+});
 
 </script>
 
