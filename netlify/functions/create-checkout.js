@@ -19,7 +19,8 @@ exports.handler = async (event) => {
 
     const { amount, firstName, lastName, email, phone, adultShirts, kidsShirts, dues } =
       JSON.parse(event.body);
-
+    const orderId = "ORD-" + Date.now();
+    
     // ✅ Validate amount
     if (isNaN(amount) || amount <= 0) {
       return {
