@@ -31,23 +31,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // ✅ Send to Google Sheets
-    await fetch("https://script.google.com/macros/s/AKfycbxzocf7EBTK8mIdA8nA8UprPCJurGgw_C-filj4cvSqhVyziKrYQvJzgf5U5Ef85uAO1w/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        phone,
-        adultShirts,
-        kidsShirts,
-        dues,
-        total: amount,
-        status: "Paid"
-      })
-    });
-
     // ✅ Create Stripe session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
