@@ -82,12 +82,16 @@ exports.handler = async (event) => {
 
   } catch (error) {
 
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*"
-      },
-      body: JSON.stringify({ url: session.url })
-    };
-  }
-};
+  console.error("STRIPE ERROR:", error);  // ✅ ADD THIS
+
+  return {
+    statusCode: 500,                      // ✅ IMPORTANT (not 200)
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    },
+    body: JSON.stringify({
+      error: error.message               // ✅ RETURN REAL ERROR
+    })
+  };
+}
+
