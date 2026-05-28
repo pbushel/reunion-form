@@ -270,8 +270,11 @@ function payNow() {
     ", M:" + document.getElementById("kidsM").value +
     ", L:" + document.getElementById("kidsL").value;
 
-  fetch("/.netlify/functions/create-checkout", {
+  fetch("https://gorgeous-crepe-f1522b.netlify.app/.netlify/functions/create-checkout", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({
       amount: total,
       firstName: document.getElementById("firstName").value,
@@ -287,6 +290,18 @@ function payNow() {
       status: "Paid"
     })
   })
+  .then(res => res.json())
+  .then(data => {
+    if (data.url) {
+      window.location.href = data.url;  // ✅ Redirect to Stripe
+    } else {
+      alert("Error: Unable to start payment.");
+    }
+  })
+  .catch(err => {
+    console.error("Payment error:", err);
+    alert("Payment failed. Please try again.");
+  });
   .then(res => {
     if (!res.ok) {
       throw new Error("Network response was not ok");
