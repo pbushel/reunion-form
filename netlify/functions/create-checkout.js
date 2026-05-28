@@ -1,16 +1,18 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS"
+};
+
 exports.handler = async (event) => {
 
   // ✅ HANDLE PREFLIGHT
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "POST, OPTIONS"
-      },
+      headers,
       body: ""
     };
   }
@@ -73,11 +75,7 @@ exports.handler = async (event) => {
     // ✅ SUCCESS RESPONSE WITH CORS
     return {
       statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "POST, OPTIONS"
-      },
+      headers,
       body: JSON.stringify({ url: session.url })
     };
 
@@ -86,13 +84,9 @@ exports.handler = async (event) => {
   console.error("STRIPE ERROR:", error);  // ✅ ADD THIS
 
   return {
-  statusCode: 500,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS"
-  },
-  body: JSON.stringify({ error: error.message })
-};
+    statusCode: 500,
+    headers,
+    body: JSON.stringify({ error: error.message })
+  };
 }
 
