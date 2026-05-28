@@ -37,9 +37,18 @@ exports.handler = async (event) => {
       customer_email: email,
 
       metadata: {
-        name: firstName + " " + lastName,
+        orderId: orderId,
+      
+        firstName: firstName,
+        lastName: lastName,
+        name: firstName + " " + lastName,  // ✅ keep this if you like
+      
+        email: email,
         phone: phone,
-        total: amount
+      
+        adultShirts: adultShirts,
+        kidsShirts: kidsShirts,
+        dues: dues
       },
 
       line_items: [
