@@ -83,12 +83,11 @@ exports.handler = async (event) => {
   } catch (error) {
 
     return {
-      statusCode: 500,
+      statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify({ error: error.message })
+      body: JSON.stringify({ url: session.url })
     };
-
   }
 };
