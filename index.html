@@ -109,22 +109,73 @@ button:hover {background:#17847f}
 
 
 <h2>Adult T-Shirts</h2>
-<div class='row'><label>S ($20)</label><input type='number' id='adultS' min="0" max="20" value='0'></div>
-<div class='row'><label>M ($20)</label><input type='number' id='adultM' min="0" max="20" value='0'></div>
-<div class='row'><label>L ($20)</label><input type='number' id='adultL' min="0" max="20" value='0'></div>
-<div class='row'><label>XL ($22)</label><input type='number' id='adultXL' min="0" max="20" value='0'></div>
-<div class='row'><label>XXL ($25)</label><input type='number' id='adultXXL' min="0" max="20" value='0'></div>
-<div class='row'><label>XXXL ($27)</label><input type='number' id='adultXXXL' min="0" max="20" value='0'></div>
-<div class='row'><label>XXXXL ($30)</label><input type='number' id='adultXXXXL' min="0" max="20" value='0'></div>
+
+<div class='row'>
+  <label>S ($20)</label>
+  <input type='number' id='adultS' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
+<div class='row'>
+  <label>M ($20)</label>
+  <input type='number' id='adultM' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
+<div class='row'>
+  <label>L ($20)</label>
+  <input type='number' id='adultL' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
+<div class='row'>
+  <label>XL ($22)</label>
+  <input type='number' id='adultXL' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
+<div class='row'>
+  <label>XXL ($25)</label>
+  <input type='number' id='adultXXL' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
+<div class='row'>
+  <label>XXXL ($27)</label>
+  <input type='number' id='adultXXXL' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
+<div class='row'>
+  <label>XXXXL ($30)</label>
+  <input type='number' id='adultXXXXL' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
 
 <h2>Children T-Shirts</h2>
-<div class='row'><label>XS ($12)</label><input type='number' id='kidsXS' min="0" max="20" value='0'></div>
-<div class='row'><label>S ($12)</label><input type='number' id='kidsS' min="0" max="20" value='0'></div>
-<div class='row'><label>M ($12)</label><input type='number' id='kidsM' min="0" max="20" value='0'></div>
-<div class='row'><label>L ($12)</label><input type='number' id='kidsL' min="0" max="20" value='0'></div>
+
+<div class='row'>
+  <label>XS ($12)</label>
+  <input type='number' id='kidsXS' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
+<div class='row'>
+  <label>S ($12)</label>
+  <input type='number' id='kidsS' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
+<div class='row'>
+  <label>M ($12)</label>
+  <input type='number' id='kidsM' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
+<div class='row'>
+  <label>L ($12)</label>
+  <input type='number' id='kidsL' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
 
 <h2>Dues</h2>
-<div class='row'><label>People age 13+ ($5)</label><input id='dues' type='number' min="0" max="20" value='0'></div>
+
+<div class='row'>
+  <label>People age 13+ ($5)</label>
+  <input id='dues' type='number' min="0" max="20" value='0' oninput="calculateTotal()">
+</div>
+
 
 <div class='total'>Total: <span id='total'>0</span></div>
 
