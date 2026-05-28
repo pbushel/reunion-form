@@ -39,3 +39,30 @@ exports.handler = async (event, context) => {
         headers: {
           "Content-Type": "application/json"
         },
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phone: data.phone,
+          adultShirts: data.adultShirts,
+          kidsShirts: data.kidsShirts,
+          dues: data.dues,
+          total: session.amount_total / 100,
+          status: "Paid"
+        })
+      });
+
+      const text = await response.text();
+
+      console.log("✅ Google response:", text);
+
+    } catch (err) {
+      console.error("❌ Error sending to Google:", err);
+    }
+  }
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ received: true })
+  };
+};
