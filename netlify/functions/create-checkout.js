@@ -8,7 +8,7 @@ const headers = {
 
 exports.handler = async (event) => {
 
-  // ✅ HANDLE PREFLIGHT
+  // ✅ Handle preflight
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
@@ -17,41 +17,53 @@ exports.handler = async (event) => {
     };
   }
 
-  try {
+  // ✅ Reject anything not POST
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      headers,
+      body: JSON.stringify({ error: "Method Not Allowed" })
+    };
+  }
 
-    const { amount, firstName, lastName, email, phone, adultShirts, kidsShirts, dues } =
-      JSON.parse(event.body);
-    const orderId = "ORD-" + Date.now();
-    
-    // ✅ Validate amount
-    if (isNaN(amount) || amount <= 0) {
+  try {
+    const data = JSON.parse(event.body);
+
+    const {
+      amount,
+      firstName,
+      lastName,
+      email,
+      phone,
+      adultShirts,
+      kidsShirts,
+      dues
+    } = data;
+
+    if (!amount || isNaN(amount) || amount <= 0) {
       return {
         statusCode: 400,
-        headers: {
-          "Access-Control-Allow-Origin": "*"
-        },
-        body: JSON.stringify({ error: "Invalid amount received" })
+        headers,
+        body: JSON.stringify({ error: "Invalid amount" })
       };
     }
 
-    // ✅ Create Stripe session
+    const orderId = "ORD-" + Date.now();
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       customer_email: email,
 
       metadata: {
-        orderId: orderId,
-      
-        firstName: firstName,
-        lastName: lastName,
-        name: firstName + " " + lastName,  // ✅ keep this if you like
-      
-        email: email,
-        phone: phone,
-      
-        adultShirts: adultShirts,
-        kidsShirts: kidsShirts,
-        dues: dues
+        orderId,
+        firstName,
+        lastName,
+        name: `${firstName} ${lastName}`,
+        email,
+        phone,
+        adultShirts,
+        kidsShirts,
+        dues
       },
 
       line_items: [
@@ -68,25 +80,24 @@ exports.handler = async (event) => {
       ],
 
       mode: "payment",
+
       success_url: "https://gorgeous-crepe-f1522b.netlify.app/success.html",
       cancel_url: "https://gorgeous-crepe-f1522b.netlify.app"
     });
 
-    // ✅ SUCCESS RESPONSE WITH CORS
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({ url: session.url })
     };
 
-    } catch (error) {
-  
-    console.error("STRIPE ERROR:", error);  // ✅ ADD THIS
-  
+  } catch (error) {
+    console.error("STRIPE ERROR:", error);
+
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({ error: error.message })
     };
   }
-};  // ✅ THIS LINE WAS MISSING
+};
