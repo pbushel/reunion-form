@@ -126,22 +126,22 @@ button:hover {background:#17847f}
 </div>
 
 <div class='row'>
-  <label>XL ($22)</label>
+  <label>XL ($20)</label>
   <input type='number' id='adultXL' min="0" max="20" value='0' oninput="calculateTotal()">
 </div>
 
 <div class='row'>
-  <label>XXL ($25)</label>
+  <label>XXL ($20)</label>
   <input type='number' id='adultXXL' min="0" max="20" value='0' oninput="calculateTotal()">
 </div>
 
 <div class='row'>
-  <label>XXXL ($27)</label>
+  <label>XXXL ($20)</label>
   <input type='number' id='adultXXXL' min="0" max="20" value='0' oninput="calculateTotal()">
 </div>
 
 <div class='row'>
-  <label>XXXXL ($30)</label>
+  <label>XXXXL ($20)</label>
   <input type='number' id='adultXXXXL' min="0" max="20" value='0' oninput="calculateTotal()">
 </div>
 
@@ -200,6 +200,11 @@ function calculateTotal() {
   total += Number(document.getElementById("adultS").value) * 20;
   total += Number(document.getElementById("adultM").value) * 20;
   total += Number(document.getElementById("adultL").value) * 20;
+
+  total += Number(document.getElementById("adultXL").value) * 20;
+  total += Number(document.getElementById("adultXXL").value) * 20;
+  total += Number(document.getElementById("adultXXXL").value) * 20;
+  total += Number(document.getElementById("adultXXXXL").value) * 20;
 
   total += Number(document.getElementById("kidsXS").value) * 15;
   total += Number(document.getElementById("kidsS").value) * 15;
