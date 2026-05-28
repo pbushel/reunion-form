@@ -288,10 +288,8 @@ function payNow() {
       status: "Paid"
     })
   })
-  .then(res => {
-    console.log("Response status:", res.status);  // ✅ DEBUG
-    return res.json();
-  })
+
+  .then(res => res.json())
   .then(data => {
     console.log("Response data:", data);  // ✅ DEBUG
   
@@ -304,26 +302,6 @@ function payNow() {
   .catch(err => {
     console.error("Payment error:", err);
     alert("Payment failed — see console.");
-  });
-
-  .then(res => {
-    if (!res.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return res.json();
-  })
-  .then(data => {
-
-    if (!data.url) {
-      alert("Error: " + JSON.stringify(data));
-      return;
-    }
-
-    window.location.href = data.url;
-  })
-  .catch(err => {
-    console.error("FULL ERROR:", err);
-    alert("Payment error");
   });
 }
 
