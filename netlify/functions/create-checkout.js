@@ -72,9 +72,13 @@ exports.handler = async (event) => {
   };
 
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message })
-    };
+      return {
+    statusCode: 500,
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    },
+    body: JSON.stringify({ error: err.message })
+  };
+  
   }
 };
