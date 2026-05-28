@@ -274,13 +274,15 @@ function payNow() {
     method: "POST",
     body: JSON.stringify({
       amount: total,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
+      firstName: document.getElementById("firstName").value,
+      lastName: document.getElementById("lastName").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+  
       adultShirts: adultShirts,
       kidsShirts: kidsShirts,
-      dues: Number(document.getElementById("dues").value),
+      dues: dues,
+  
       total: total,
       status: "Paid"
     })
