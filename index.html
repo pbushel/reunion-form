@@ -328,17 +328,23 @@ function resetForm() {
 
   document.getElementById("dues").value = 0;
 
-  // reset text fields
+  // reset text
   document.getElementById("firstName").value = "";
   document.getElementById("lastName").value = "";
   document.getElementById("email").value = "";
   document.getElementById("phone").value = "";
 
-  // ✅ reset totals (all of them now)
-  document.getElementById("subtotal").innerText = "0.00";
-  document.getElementById("fee").innerText = "0.00";
-  document.getElementById("total").innerText = "0.00";
+  // ✅ reset totals safely
+  if (document.getElementById("subtotal"))
+    document.getElementById("subtotal").innerText = "0.00";
+
+  if (document.getElementById("fee"))
+    document.getElementById("fee").innerText = "0.00";
+
+  if (document.getElementById("total"))
+    document.getElementById("total").innerText = "0.00";
 }
+
 
 </script>
 
