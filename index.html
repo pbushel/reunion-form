@@ -196,24 +196,39 @@ button:hover {background:#17847f}
 <script>
 
 function calculateTotal() {
-  let total = 0;
+  let subtotal = 0;
 
-  total += Number(document.getElementById("adultS").value) * 20;
-  total += Number(document.getElementById("adultM").value) * 20;
-  total += Number(document.getElementById("adultL").value) * 20;
-  total += Number(document.getElementById("adultXL").value) * 20;
-  total += Number(document.getElementById("adultXXL").value) * 20;
-  total += Number(document.getElementById("adultXXXL").value) * 20;
-  total += Number(document.getElementById("adultXXXXL").value) * 20;
+  // Adult shirts
+  subtotal += Number(document.getElementById("adultS").value) * 20;
+  subtotal += Number(document.getElementById("adultM").value) * 20;
+  subtotal += Number(document.getElementById("adultL").value) * 20;
+  subtotal += Number(document.getElementById("adultXL").value) * 20;
+  subtotal += Number(document.getElementById("adultXXL").value) * 20;
+  subtotal += Number(document.getElementById("adultXXXL").value) * 20;
+  subtotal += Number(document.getElementById("adultXXXXL").value) * 20;
 
-  total += Number(document.getElementById("kidsXS").value) * 15;
-  total += Number(document.getElementById("kidsS").value) * 15;
-  total += Number(document.getElementById("kidsM").value) * 15;
-  total += Number(document.getElementById("kidsL").value) * 15;
+  // Kids shirts
+  subtotal += Number(document.getElementById("kidsXS").value) * 15;
+  subtotal += Number(document.getElementById("kidsS").value) * 15;
+  subtotal += Number(document.getElementById("kidsM").value) * 15;
+  subtotal += Number(document.getElementById("kidsL").value) * 15;
 
-  total += Number(document.getElementById("dues").value) * 5;
+  // Dues
+  subtotal += Number(document.getElementById("dues").value) * 5;
 
-  document.getElementById("total").innerText = total;
+  // ✅ Calculate Stripe fee (2.9% + $0.30)
+  let fee = subtotal * 0.029 + 0.30;
+
+  // ✅ Round to 2 decimals
+  fee = Math.round(fee * 100) / 100;
+
+  let totalWithFee = subtotal + fee;
+  totalWithFee = Math.round(totalWithFee * 100) / 100;
+
+  // ✅ Display values
+  document.getElementById("subtotal").innerText = subtotal.toFixed(2);
+  document.getElementById("fee").innerText = fee.toFixed(2);
+  document.getElementById("total").innerText = totalWithFee.toFixed(2);
 }
 
 function payNow() {
