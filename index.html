@@ -184,6 +184,7 @@ button:hover {background:#17847f}
 <div class="buttons">
   <button onclick="calculateTotal()">Calculate Total</button>
   <button onclick="payNow()">Pay Now</button>
+  <button onclick="resetForm()">Reset</button>
 </div>
 
 </div>
@@ -200,7 +201,6 @@ function calculateTotal() {
   total += Number(document.getElementById("adultS").value) * 20;
   total += Number(document.getElementById("adultM").value) * 20;
   total += Number(document.getElementById("adultL").value) * 20;
-
   total += Number(document.getElementById("adultXL").value) * 20;
   total += Number(document.getElementById("adultXXL").value) * 20;
   total += Number(document.getElementById("adultXXXL").value) * 20;
@@ -218,25 +218,35 @@ function calculateTotal() {
 
 function payNow() {
 
-  let total = Number(document.getElementById("total").innerText);
+  // ✅ GET VALUES ONCE
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
 
-  console.log("Total:", total);
+  // ✅ REQUIRED FIELD CHECK
+  if (!firstName || !lastName || !email || !phone) {
+    alert("Please fill in First Name, Last Name, Email, and Cell Phone.");
+    return;
+  }
+
+  let total = Number(document.getElementById("total").innerText);
 
   if (isNaN(total) || total <= 0) {
     alert("Please calculate total first.");
     return;
   }
 
+  // ✅ FIXED shirt strings (correct IDs)
   let adultShirts =
     "S:" + document.getElementById("adultS").value +
     ", M:" + document.getElementById("adultM").value +
-    ", L:" + document.getElementById("adultL").value+
-    ", XL:" + document.getElementById("adultM").value +
-    ", XXL:" + document.getElementById("adultM").value +
-    ", XXXL:" + document.getElementById("adultM").value +
-    ", XXXXL:" + document.getElementById("adultM").value;
+    ", L:" + document.getElementById("adultL").value +
+    ", XL:" + document.getElementById("adultXL").value +
+    ", XXL:" + document.getElementById("adultXXL").value +
+    ", XXXL:" + document.getElementById("adultXXXL").value +
+    ", XXXXL:" + document.getElementById("adultXXXXL").value;
 
-  
   let kidsShirts =
     "XS:" + document.getElementById("kidsXS").value +
     ", S:" + document.getElementById("kidsS").value +
@@ -250,10 +260,10 @@ function payNow() {
     },
     body: JSON.stringify({
       amount: total,
-      firstName: document.getElementById("firstName").value,
-      lastName: document.getElementById("lastName").value,
-      email: document.getElementById("email").value,
-      phone: document.getElementById("phone").value,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
       adultShirts: adultShirts,
       kidsShirts: kidsShirts,
       dues: Number(document.getElementById("dues").value),
@@ -268,24 +278,51 @@ function payNow() {
     return res.json();
   })
   .then(data => {
-  
-    console.log("Stripe response:", data);
-  
+
     if (!data.url) {
       alert("Error: " + JSON.stringify(data));
       return;
     }
-  
+
     window.location.href = data.url;
   })
   .catch(err => {
     console.error("FULL ERROR:", err);
     alert("Payment error");
   });
+}
 
+// ✅ RESET FUNCTION
+function resetForm() {
+
+  // reset numbers
+  document.getElementById("adultS").value = 0;
+  document.getElementById("adultM").value = 0;
+  document.getElementById("adultL").value = 0;
+  document.getElementById("adultXL").value = 0;
+  document.getElementById("adultXXL").value = 0;
+  document.getElementById("adultXXXL").value = 0;
+  document.getElementById("adultXXXXL").value = 0;
+
+  document.getElementById("kidsXS").value = 0;
+  document.getElementById("kidsS").value = 0;
+  document.getElementById("kidsM").value = 0;
+  document.getElementById("kidsL").value = 0;
+
+  document.getElementById("dues").value = 0;
+
+  // reset text fields
+  document.getElementById("firstName").value = "";
+  document.getElementById("lastName").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("phone").value = "";
+
+  // reset total
+  document.getElementById("total").innerText = 0;
 }
 
 </script>
+
 
 
 
