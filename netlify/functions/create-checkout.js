@@ -81,8 +81,9 @@ exports.handler = async (event) => {
 
       mode: "payment",
 
-      success_url: "https://gorgeous-crepe-f1522b.netlify.app/success.html",
-      cancel_url: "https://gorgeous-crepe-f1522b.netlify.app"
+      success_url: "https://pbushel.github.io/reunion-form/success.html",
+      cancel_url: "https://pbushel.github.io/reunion-form/"
+
     });
 
     return {
