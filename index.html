@@ -340,7 +340,11 @@ function resetForm() {
   if (document.getElementById("total"))
     document.getElementById("total").innerText = "0.00";
 }
-
+  
+// ✅ Run calculation when page loads
+document.addEventListener("DOMContentLoaded", function () {
+  calculateTotal();
+});
 
 </script>
 
