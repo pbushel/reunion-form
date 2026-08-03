@@ -187,7 +187,8 @@ button:hover {background:#17847f}
   //<button onclick="payNow()">Pay Now</button>
   //<button onclick="resetForm()">Reset</button>
 //</div>
-
+  
+//Below 3 lines added to close ordering.  When ordering resumes, comment out the below 3 lines and uncomment the above 5 lines
   <div class="buttons">
   <p style="color:red; font-size:20px; font-weight:bold;">
     🚫 T‑Shirt Ordering is Now Closed
@@ -243,6 +244,9 @@ function calculateTotal() {
 }
 
 function payNow() {
+  //Added as extra prottection to close ordering.  Remove the next two lines when ordering resumes
+  alert("T‑shirt ordering is now closed.");
+  return;
 
   // ✅ GET VALUES ONCE
   const firstName = document.getElementById("firstName").value.trim();
