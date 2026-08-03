@@ -182,9 +182,19 @@ button:hover {background:#17847f}
 
 <div class='buttons'>
 
-<div class="buttons">
+//<div class="buttons">
+  //<button onclick="calculateTotal()">Calculate Total</button>
+  //<button onclick="payNow()">Pay Now</button>
+  //<button onclick="resetForm()">Reset</button>
+//</div>
+
+  <div class="buttons">
+  <p style="color:red; font-size:20px; font-weight:bold;">
+    🚫 T‑Shirt Ordering is Now Closed
+  </p>
+
   <button onclick="calculateTotal()">Calculate Total</button>
-  <button onclick="payNow()">Pay Now</button>
+  <button disabled>Pay Now (Closed)</button>
   <button onclick="resetForm()">Reset</button>
 </div>
 
